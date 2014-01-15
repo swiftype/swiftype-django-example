@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      {% block title %}{% endblock %}
+    </title>
+    {% load staticfiles %}
+    <link href="{% static '/static/autocomplete.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static '/static/search.css' %}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="{% static '/static/jquery.swiftype.autocomplete.js' %}"></script>
+    <script src="{% static '/static/jquery.ba-hashchange.min.js' %}"></script>
+    <script src="{% static '/static/jquery.swiftype.search.js' %}"></script>
+  </head>
+  <body>
+    <div class="content">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>

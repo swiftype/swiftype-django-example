@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %} Blog Archive {% endblock %}
+     
+{% block content %}
+
+  <h1> My Blog Archive </h1>
+  {% for post in posts %}
+  <div class="post">
+    <h2>
+      <a href="/{{post.slug}}">
+        {{post.title}}
+      </a>
+    </h2>
+    <p>
+      Posted on
+      <time datetime="{{post.created|date:"c"}}">
+      {{post.created|date}}
+      </time>
+    </p>
+  </div>
+  {% endfor %}
+
+  <div class="pagination">
+    <span class="post-links">
+      {% if posts.has_previous %}
+        <a href="?page={{ posts.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+        Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+      </span>
+
+      {% if posts.has_next %}
+        <a href="?page={{ posts.next_page_number }}">next</a>
+      {% endif %}
+    </span>
+  </div> 
+
+  <div class="search">
+    <form>
+      <input type='text' id='st-search-input' class='st-search-input'/>
+    </form>
+    <div id="st-results-container" class="st-result-listing"></div>
+  </div>
+
+  <script>
+    $(function() {
+      $('#st-search-input').swiftype({
+        engineKey: "{{ swiftype_engine_key }}"
+      });
+
+      $('#st-search-input').swiftypeSearch({
+        resultContainingElement: '#st-results-container',
+        engineKey: "{{ swiftype_engine_key }}"
+      });
+    });
+  </script>
+
+{% endblock %}
